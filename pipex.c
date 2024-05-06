@@ -6,7 +6,7 @@
 /*   By: mbankhar <mbankhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:12:58 by mbankhar          #+#    #+#             */
-/*   Updated: 2024/05/06 09:36:29 by mbankhar         ###   ########.fr       */
+/*   Updated: 2024/05/06 16:16:58 by mbankhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,26 @@ char	*get_path(char **env, char *cmd, t_var var)
 			i++;
 	}
 	realpath = ft_split(env[i], ':');
+	realpath[0] = ft_substr(realpath[0], 5, ft_strlen(realpath[0] -4));
+	i = -1;
+	while (realpath[++i])
+	{
+		printf("%s\n", realpath[i]);
+	}
 	i = -1;
 	while (realpath[++i])
 	{
 		string = ft_strjoinslesh(realpath[i], cmd);
 		if (access(string, X_OK) == 0)
+		{
+			printf("%s\n", string);
 			break ;
+		}
 		free(string);
 	}
+	printf("%s\n", string);
+	// exit(1);
 	ft_free(realpath);
-	if (i == '\0')
-	{
-		ft_putendl_fd("No command", 2);
-		exit(0);
-	}
 	return (string);
 }
 

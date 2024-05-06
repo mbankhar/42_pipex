@@ -6,7 +6,7 @@
 /*   By: mbankhar <mbankhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 17:13:37 by mbankhar          #+#    #+#             */
-/*   Updated: 2024/05/06 13:46:01 by mbankhar         ###   ########.fr       */
+/*   Updated: 2024/05/06 16:17:20 by mbankhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,10 @@ void	get_args(int argc, char **argv, t_var *var)
 		else
 			var->cmd_two = ft_split(argv[3], ' ');
 		// int	i = -1;
-		// while (var->cmd_one[++i])
-		// {
-		// 	printf("%s\n", var->cmd_one[i]);
-		// }
-		// i = -1;
-		// while (var->cmd_one[++i])
+		// while (var->cmd_two[++i])
 		// {
 		// 	printf("%s\n", var->cmd_two[i]);
 		// }
-		// printf("%s\n", var->cmd_two[2]);
-		// printf("%s\n", var->cmd_two[3]);
-		// printf("%s\n", var->cmd_two[4]);
-		// exit(1);
 	}
 	else
 	{
@@ -75,13 +66,11 @@ void	execute(char **env, char *cmd, char **argv, t_var var)
 	}
 }
 
-
 void	executepar(char **env, char *cmd, char **argv, t_var var)
 {
 	char	*path_cmd;
 
 	path_cmd = get_path(env, cmd, var);
-	// system("leaks pipex");
 	if (execve(path_cmd, var.cmd_two, env) == -1)
 	{
 		ft_putstr_fd("pipex: command not found: ", 2);
