@@ -6,7 +6,7 @@
 /*   By: mbankhar <mbankhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 17:13:37 by mbankhar          #+#    #+#             */
-/*   Updated: 2024/05/06 16:17:20 by mbankhar         ###   ########.fr       */
+/*   Updated: 2024/05/06 18:38:51 by mbankhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,6 @@ void	get_args(int argc, char **argv, t_var *var)
 			var->cmd_two = ft_splitmodif(argv[3], ' ');
 		else
 			var->cmd_two = ft_split(argv[3], ' ');
-		// int	i = -1;
-		// while (var->cmd_two[++i])
-		// {
-		// 	printf("%s\n", var->cmd_two[i]);
-		// }
 	}
 	else
 	{
@@ -52,30 +47,30 @@ void	ft_free(char **array)
 	free(array);
 }
 
-void	execute(char **env, char *cmd, char **argv, t_var var)
+void	execute(char **env, char *cmd, t_var var)
 {
 	char	*path_cmd;
 
-	path_cmd = get_path(env, cmd, var);
+	path_cmd = get_path(env, cmd);
 	if (execve(path_cmd, var.cmd_one, env) == -1)
 	{
 		ft_putstr_fd("pipex: command not found: ", 2);
 		ft_putendl_fd(var.cmd_one[0], 2);
 		ft_free(var.cmd_one);
-		exit(0);
+		exit(1);
 	}
 }
 
-void	executepar(char **env, char *cmd, char **argv, t_var var)
+void	executepar(char **env, char *cmd, t_var var)
 {
 	char	*path_cmd;
 
-	path_cmd = get_path(env, cmd, var);
+	path_cmd = get_path(env, cmd);
 	if (execve(path_cmd, var.cmd_two, env) == -1)
 	{
 		ft_putstr_fd("pipex: command not found: ", 2);
 		ft_putendl_fd(var.cmd_two[0], 2);
 		ft_free(var.cmd_two);
-		exit(0);
+		exit(1);
 	}
 }

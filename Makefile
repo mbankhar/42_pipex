@@ -1,9 +1,10 @@
 NAME	:= pipex
 
 LIBFT	:= libft
-INCLUDES := -I $(LIBFT)
+INCLUDES := #-I $(LIBFT)
+# INCLUDES := -I /libft/libft.h
 LIBFT_LIB	:= $(LIBFT)/libft.a
-SRCS	:= pipex.c
+SRCS	:= pipex.c pipex_utils.c
 OBJS	:= ${SRCS:.c=.o}
 
 CFLAGS	:= -Wextra -Wall -Werror -g
